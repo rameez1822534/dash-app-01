@@ -117,22 +117,22 @@ dropdown_row = dbc.Row([
     dbc.Col([
         html.Label("Select City"),
         city_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 
     dbc.Col([
         html.Label("Select Package"),
         package_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 
     dbc.Col([
         html.Label("Select Tilt"),
         angle_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 
     dbc.Col([
         html.Label("Select Direction"),
         direction_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 ], className="mb-3")
 
 
@@ -198,46 +198,32 @@ def update_output(selected_city, selected_package, selected_angle, selected_dire
 
 # Define the app layout
 app.layout = dbc.Container(fluid=True, children=[
-    html.Div([
-        # Add the gauge indicator here
-        dbc.Row(
-            [
-                dbc.Col(dcc.Loading(
-                    [
-                        # Center the dropdown menu in the middle of the Dash app
-                        dbc.Row(
-                            dbc.Col([
-                                html.H1('Solar Panels: Return on Invested Capital', style={'font-size': '54px', 'font-weight': 'bold', 'text-align': 'center', 'margin-bottom': '20px'}),
-                                dropdown_row,
-                                
-                            ],
-                                width=7,
-                                className="mb-3",
-                                style={"margin-top": "40px"}
-                            ),
-                            # Add justify-content-center to center the content
-                            className="justify-content-center",
-                        ),
-                        dbc.Row(
-                            [
-                                dbc.Col(dcc.Graph(id='line-chart', figure=main_fig), lg=6 ),
-                                dbc.Col(dcc.Graph(id='circle-with-number', figure=fig), lg=6),
-                                
-                            ],
-                            className="mt-4",
-                        ),
-                        dbc.Row(
-                            [
-                                dbc.Col(dcc.Graph(figure=fig1), lg=6),
-                                dbc.Col(dcc.Graph(figure=prognoses_fig), lg=6)
-                            ],
-                            className="mt-4",
-                        ),
-                    ],
-                )),
-            ],
-        ),
-    ]),
+    dbc.Row(
+        [
+            dbc.Col(
+                [
+                    html.H1('Solar Panels: Return on Invested Capital', className='display-4 mb-4 text-center font-weight-bold'),
+                    dropdown_row,
+                ],
+                lg=7, md=10, sm=12, xs=12, className='mb-3', style={"margin-top": "40px"}
+            ),
+        ],
+        className="justify-content-center",
+    ),
+    dbc.Row(
+        [
+            dbc.Col(dcc.Graph(id='line-chart', figure=main_fig), lg=6),
+            dbc.Col(dcc.Graph(id='circle-with-number', figure=fig), lg=6),
+        ],
+        className="mt-4",
+    ),
+    dbc.Row(
+        [
+            dbc.Col(dcc.Graph(figure=fig1), lg=6),
+            dbc.Col(dcc.Graph(figure=prognoses_fig), lg=6),
+        ],
+        className="mt-4",
+    ),
 ])
 
 
