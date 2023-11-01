@@ -12,6 +12,21 @@ from calc_years_until_breakeven import calc_years_until_breakeven
 
 # Import the data for cities and solar packages
 from data_dicts import packages_dict, cities_dict, years_list
+import threading
+import signal
+
+def signal_handler(signum, frame):
+    # Handle the signal here
+    pass
+
+if __name__ == "__main__":
+    # Check if we're in the main thread
+    if threading.current_thread() == threading.main_thread():
+        # Register the signal handler
+        signal.signal(signal.SIGTERM, signal_handler)
+        signal.signal(signal.SIGINT, signal_handler)
+    else:
+        print("Signal handling is only supported in the main thread.")
 
 
 # Load the "superhero" themed figure template from dash-bootstrap-templates library,
