@@ -6,12 +6,12 @@ import pandas as pd
 from dash_bootstrap_templates import load_figure_template
 import os 
 # Import class and functions
-from .electricity_output_calc import SolarPanelSystem
-from .find_tilt_and_direction_value import find_tilt_and_direction_value
-from .calc_years_until_breakeven import calc_years_until_breakeven
+from electricity_output_calc import SolarPanelSystem
+from find_tilt_and_direction_value import find_tilt_and_direction_value
+from calc_years_until_breakeven import calc_years_until_breakeven
 
 # Import the data for cities and solar packages
-from .data_dicts import packages_dict, cities_dict, years_list
+from data_dicts import packages_dict, cities_dict, years_list
 
 
 
