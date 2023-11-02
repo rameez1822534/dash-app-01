@@ -101,6 +101,7 @@ city_textbox = dcc.Input(
     id='city-textbox',
     type='text',
     placeholder='Input City',
+    value='Kiruna',
     className='mb-3',
     style={'color': 'black', 'width': '100%'}
 )
