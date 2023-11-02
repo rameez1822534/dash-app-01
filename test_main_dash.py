@@ -326,31 +326,31 @@ app.layout = dbc.Container(fluid=True, children=[
                             ],
                             className="justify-content-center",
                         ),
-                        dbc.Row(
-                            [
-                                dbc.Col([
-                                    html.H2("Return of investment", style={'font-size': '32px', 'font-weight': 'bold', 'text-align': 'center'}),
-                                    dcc.Graph(id='line-chart', figure=main_fig),
-                                ], lg=6),
-                                dbc.Col([
-                                    html.H2("Years until breakeven", style={'font-size': '32px', 'font-weight': 'bold', 'text-align': 'center'}),
-                                    dcc.Graph(id='circle-with-number', figure=fig),
-                                ], lg=6),
-                            ],
-                            className="mt-4",
+                       dbc.Row(
+            [
+                dbc.Col([
+                    html.H2("Return of investment", style={'font-size': '30px', 'font-weight': 'bold', 'text-align': 'center'}),
+                    dcc.Graph(id='line-chart', figure=main_fig, style={'width': '100%'}),
+                ], lg=6, xs=12),  # lg=6 for normal displays, xs=12 for mobile displays
+                dbc.Col([
+                    html.H2("Years until breakeven", style={'font-size': '30px', 'font-weight': 'bold', 'text-align': 'center', 'margin-bottom': '0px'}),
+                    dcc.Graph(id='circle-with-number', figure=fig, style={'width': '100%'}),
+                ], lg=6, xs=12),
+            ],
+            className="mt-5",
                         ),
-                        dbc.Row(
-                            [
-                                dbc.Col([
-                                    html.H2("Energy source destribution in Sweden", style={'font-size': '32px', 'font-weight': 'bold', 'text-align': 'center'}),
-                                    dcc.Graph(figure=fig1),
-                                ], lg=6),
-                                dbc.Col([
-                                    html.H2("Price forecast (per electricity zone)", style={'font-size': '32px', 'font-weight': 'bold', 'text-align': 'center'}),
-                                    dcc.Graph(figure=prognoses_fig),
-                                ], lg=6),
-                            ],
-                            className="mt-4",
+                         dbc.Row(
+            [
+                dbc.Col([
+                    html.H2("Energy source distribution in Sweden", style={'font-size': '30px', 'font-weight': 'bold', 'text-align': 'center'}),
+                    dcc.Graph(figure=fig1, style={'width': '100%'}),
+                ], lg=6, xs=12),
+                dbc.Col([
+                    html.H2("Price forecast (per electricity zone)", style={'font-size': '30px', 'font-weight': 'bold', 'text-align': 'center'}),
+                    dcc.Graph(figure=prognoses_fig, style={'width': '100%'}),
+                ], lg=6, xs=12),
+            ],
+            className="mt-5",
                         ),
                     ],
                 )),
