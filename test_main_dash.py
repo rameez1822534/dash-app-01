@@ -32,7 +32,7 @@ fig1 = px.pie(names=sums.index, values=sums.values, title='Energy source destrib
 fig1.update_traces(pull=[0,0,0,0,0,0,0,0,0.2])
 fig1.update_layout(
     title='Energy source distribution in Sweden',
-    title_font=dict(size=24),  # Adjust the size (30 in this example) as needed
+    title_font=dict(size=24, family="Arial", color="white"),
     plot_bgcolor="#11293D"
 )
 
@@ -196,8 +196,22 @@ def update_output(selected_city, selected_package, selected_angle, selected_dire
     return main_fig, fig
 
 
-# Define the app layout
 app.layout = dbc.Container(fluid=True, children=[
+    dcc.Markdown('''
+        <style>
+            /* Default font size for titles */
+            .graph-title {
+                font-size: 24px;
+            }
+
+            /* Adjust font size for smaller screens (e.g., mobile) */
+            @media (max-width: 768px) {
+                .graph-title {
+                    font-size: 18px;
+                }
+            }
+        </style>
+    '''),
     dbc.Row(
         [
             dbc.Col(
@@ -212,19 +226,21 @@ app.layout = dbc.Container(fluid=True, children=[
     ),
     dbc.Row(
         [
-            dbc.Col(dcc.Graph(id='line-chart', figure=main_fig), lg=6),
-            dbc.Col(dcc.Graph(id='circle-with-number', figure=fig), lg=6),
+            dbc.Col(dcc.Graph(id='line-chart', figure=main_fig), lg=6, md=12, sm=12, xs=12),
+            dbc.Col(dcc.Graph(id='circle-with-number', figure=fig), lg=6, md=12, sm=12, xs=12),
         ],
         className="mt-4",
     ),
     dbc.Row(
         [
-            dbc.Col(dcc.Graph(figure=fig1), lg=6),
-            dbc.Col(dcc.Graph(figure=prognoses_fig), lg=6),
+            dbc.Col(dcc.Graph(figure=fig1), lg=6, md=12, sm=12, xs=12),
+            dbc.Col(dcc.Graph(figure=prognoses_fig), lg=6, md=12, sm=12, xs=12),
         ],
         className="mt-4",
     ),
 ])
+
+
 
 
 if __name__ == "__main__":
