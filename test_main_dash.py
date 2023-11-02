@@ -104,15 +104,27 @@ city_textbox = dcc.Input(
     className='mb-3',
     style={'color': 'black', 'width': '100%'}
 )
+
+# Create text div under textbox
+insolation_response_div = html.Div(id="text-output-insolation", style={'font-size': '14px',
+                                                                       'color': 'grey',
+                                                                       'margin-top': '0px',
+                                                                       'text-align': 'center'})
 centered_city_input_row = dbc.Row(
-    dbc.Col([
-        html.Label("Enter City"),
-        city_textbox,
-    ], width={"size": 4, "offset": 4}),
-    justify="left",
-    align="center",
-    className="mb-3",
+    dbc.Col(
+        [
+            html.Label("Enter City"),
+            city_textbox,
+            insolation_response_div,
+        ],
+        lg=4, md=6, sm=8, xs=12,  # Specify different widths for different screen sizes
+        className="mb-3",
+    ),
+    justify="center",  # Center the row contents horizontally
+    align="center",    # Center the row contents vertically
 )
+
+
 # Create Dropdowns for the second graph
 pricezone_dropdown = dcc.Dropdown(
     id='pricezone-dropdown',
@@ -153,22 +165,22 @@ dropdown_row = dbc.Row([
     dbc.Col([
         html.Label("Select Electricity Price Zone"),
         pricezone_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], width=3,lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 
     dbc.Col([
         html.Label("Select Package"),
         package_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], width=3,lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 
     dbc.Col([
         html.Label("Select Tilt"),
         angle_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], width=3,lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 
     dbc.Col([
         html.Label("Select Direction"),
         direction_dropdown,
-    ], width=3),  # Adjust the width as needed
+    ], width=3,lg=3, md=3, sm=6, xs=12),  # Adjust the width as needed
 ], className="mb-3")
 
 
@@ -186,6 +198,7 @@ dropdown_row = dbc.Row([
 
 @app.callback(
         Output('text-output', 'children'),
+        Output('text-output-insolation', 'children'),
         State("city-textbox", "value"),
         Input("city-textbox", "n_submit")
 )
@@ -193,6 +206,11 @@ dropdown_row = dbc.Row([
 def print_city(city, n_submit):
     global insolation_mean
     insolation_mean = coordinates_to_insolation_mean(city)
+    
+    insolation_string = f"Avg insolation: {insolation_mean:.1f}"
+
+    return None, insolation_string
+
 
     # if n_submit is None:
     #     return "Type something and press Enter."
@@ -286,6 +304,7 @@ app.layout = dbc.Container(fluid=True, children=[
                             ],
                                 width=7,
                                 className="mb-3",
+                                lg=7, md=10, sm=12, xs=12,
                                 style={"margin-top": "40px"}
                             ),
                             className="justify-content-center",
@@ -294,7 +313,13 @@ app.layout = dbc.Container(fluid=True, children=[
                         dbc.Row(
                             dbc.Col(centered_city_input_row, width=7),
                             className="justify-content-center",
+                            
                         ),
+                        # # dbc.Row(
+                        # #     dbc.Col(html.Div(id="text-output-insolation"),
+                        # #     className="justify-content-center")
+
+                        # ),
                         dbc.Row(
                             [
                                 dbc.Col(dropdown_row, width=7),
